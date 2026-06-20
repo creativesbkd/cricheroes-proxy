@@ -1,0 +1,25 @@
+export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+  if (req.method === "OPTIONS") return res.status(200).end();
+
+  try {
+    const response = await fetch(
+      "https://api.cricheroes.in/api/v1/player/get-player-filter-new/21564074",
+      {
+        headers: {
+          "Api-Key": "cr!CkH3r0s",
+          "Authorization": "b001b760-63bc-11f1-8ef5-83e98e105553",
+          "Device-Type": "Chrome: 149.0.0.0",
+          "Udid": "4cf15c08eb487cfbe3fa2fe4033fb230",
+          "Accept": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch stats" });
+  }
+}
